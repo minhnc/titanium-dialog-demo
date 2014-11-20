@@ -43,9 +43,12 @@ function showDialog() {
 };
 
 /**
- * Define templates 
+ * Dialog Content 
  */
 function loadDialogContent(e) {
+	
+	// Templates
+	
   	var template_1 = {
   		properties: { height: 60, backgroundColor: '#bc5606', selectedBackgroundColor: '#000' },
 	    childTemplates: [
@@ -157,7 +160,7 @@ function loadDialogContent(e) {
 	    ]
 	};
 	
-	//
+	// ListView with 3 sections, each with 5 rows
 	
 	var sections = [];
 	for (var i=0; i < 3; i++) {
@@ -168,7 +171,7 @@ function loadDialogContent(e) {
 				case 0: 
 					items.push({ 
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Row 0' }
+						title: { text: String.format('Row %d', j) }
 					});
 				break;
 				
@@ -176,7 +179,7 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_2',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Row 1' },
+						title: { text: String.format('Row %d', j) },
 						icon_2: { image: '/images/users.png' }
 					});
 				break;
@@ -185,7 +188,7 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_3',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Row 2' },
+						title: { text: String.format('Row %d', j) },
 						number: { text: '-25%' }
 					});
 				break;
@@ -194,7 +197,7 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_4',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Row 3' },
+						title: { text: String.format('Row %d', j) },
 						row_right_uppper: { text: 26.50 },
 						icon_2: { },
 						row_right_lower: { text: 29.44 }
@@ -205,7 +208,7 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_4',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Row 4' },
+						title: { text: String.format('Row %d', j) },
 						row_right_uppper: { text: 'Ms Mary Jone' },
 						icon_2: { visible: true, width: 10, left: 10 },
 						row_right_lower: { text: '15:45' }
@@ -214,7 +217,12 @@ function loadDialogContent(e) {
 			}
 		};
 		
-	 	sections.push( Ti.UI.createListSection({ items: items, headerView: Ti.UI.createView({ height: i ? 4 : 0, backgroundColor: '#fff' }) }) );
+		if ( i > 0 ) { // Add bold seperator for each section 
+			sections.push( Ti.UI.createListSection({ items: items, headerView: Ti.UI.createView({ height: i ? 4 : 0, backgroundColor: '#fff' }) }) );	
+		} else {
+			sections.push( Ti.UI.createListSection({ items: items }) );
+		}
+	 	
 	};
 		
 	//
