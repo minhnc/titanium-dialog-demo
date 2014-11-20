@@ -20,21 +20,31 @@ var dialog;
 function showDialog() {
 	if (dialog == null) {
 		var iDialog = require('lib/iDialog');
+		
+		// Init Dialog
 		dialog = new iDialog({
 			container: win,
 			content: loadDialogContent()
 		});
+		
+		// listen to event: show
 		dialog.on('show', function() {
 			Ti.API.log('iDialog: show');
 		});
+		
+		// listen to event: hide
 		dialog.on('hide', function() {
 			Ti.API.log('iDialog: hide');
 		});
 	}
 		
+	// Show dialog		
 	dialog.show();
 };
 
+/**
+ * Define templates 
+ */
 function loadDialogContent(e) {
   	var template_1 = {
   		properties: { height: 60, backgroundColor: '#bc5606', selectedBackgroundColor: '#000' },
@@ -119,7 +129,7 @@ function loadDialogContent(e) {
 	            childTemplates: [
 		            { 
 			            type: 'Ti.UI.Label',
-			            bindId: 'number_1',
+			            bindId: 'row_right_uppper',
 			            properties: { right: 0, color: '#fff', font: { fontSize: 16, fontStyle: 'italic' } }
 			        },
 			    	{
@@ -137,7 +147,7 @@ function loadDialogContent(e) {
 					        },
 					        { 
 					            type: 'Ti.UI.Label',
-					            bindId: 'number_2',
+					            bindId: 'row_right_lower',
 					            properties: { left: 10, color: '#fff', font: { fontSize: 16, fontStyle: 'italic' } }
 					        }
 			            ]
@@ -158,7 +168,7 @@ function loadDialogContent(e) {
 				case 0: 
 					items.push({ 
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Undo forget' }
+						title: { text: 'Row 0' }
 					});
 				break;
 				
@@ -166,7 +176,7 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_2',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Undo' },
+						title: { text: 'Row 1' },
 						icon_2: { image: '/images/users.png' }
 					});
 				break;
@@ -175,7 +185,7 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_3',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Undo' },
+						title: { text: 'Row 2' },
 						number: { text: '-25%' }
 					});
 				break;
@@ -184,10 +194,10 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_4',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Undo' },
-						number_1: { text: 26.50 },
+						title: { text: 'Row 3' },
+						row_right_uppper: { text: 26.50 },
 						icon_2: { },
-						number_2: { text: 29.44 }
+						row_right_lower: { text: 29.44 }
 					});
 				break;
 				
@@ -195,10 +205,10 @@ function loadDialogContent(e) {
 					items.push({ 
 						template: 'template_4',
 						icon: { image: '/images/refresh.png' },
-						title: { text: 'Undo' },
-						number_1: { text: 'Ms Mary Jone' },
+						title: { text: 'Row 4' },
+						row_right_uppper: { text: 'Ms Mary Jone' },
 						icon_2: { visible: true, width: 10, left: 10 },
-						number_2: { text: '15:45' }
+						row_right_lower: { text: '15:45' }
 					});
 				break;
 			}
